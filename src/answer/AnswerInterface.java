@@ -1,10 +1,15 @@
 package answer;
 
+/**
+ * @author Joshua Cords
+ * CS 356 Object Oriented Programming - Project 1
+ */
+
 public interface AnswerInterface {
+	public Answer duplicateWithoutAnswers();
 	public boolean isAnswer(Answer answer);
-	public void setAnswer(int[] answerIndexes);
-	public void setAnswer(String[] answerString);
-	public void setAnswerOptions(String[] answerOptions);
+	public String[] getAnswerStrings();
+	public int getNumIndexes();
 	@Override
 	public String toString();
 }

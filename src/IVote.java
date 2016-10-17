@@ -2,16 +2,37 @@ import java.util.HashMap;
 
 import answer.Answer;
 
+/**
+ * @author Joshua Cords
+ * CS 356 Object Oriented Programming - Project 1
+ */
+
 public class IVote {
 
 	public IVote(){
 		_answerMap = new HashMap<Integer, Answer>();
+		idCounter = 0;
 	}
 
+	/**
+	 * Sizes internal elements to expected classSize
+	 * @param classSize
+	 */
+	public IVote(int classSize){
+		_answerMap = new HashMap<Integer, Answer>((int) (classSize * 1.5));
+		idCounter = 0;
+	}
+
+	/**
+	 * Resets all answers which were entered
+	 */
 	public void clearAnswers(){
 		_answerMap.clear();
 	}
 
+	/**
+	 * Displays Students Polled, Correct Answers, and % Correct
+	 */
 	public void displayAnswerStats(){
 		int students = 0;
 		int correctAnswers = 0;
@@ -28,18 +49,38 @@ public class IVote {
 		System.out.println((float)correctAnswers*100/students + "% Correct");
 	}
 
-	public Answer getAnswer(){
-		return _answer;
+	public Answer getAnswer(int studentId){
+		//TODO return student's last answer in the duplicate answer
+		return _answer.duplicateWithoutAnswers();
 	}
 
+	/**
+	 * Assigns a fresh student id
+	 * @return
+	 */
+	public int getNewId() {
+		return idCounter++;
+	}
+
+	/**
+	 * Sets the master answer for use in duplicating to students and for determining correctness
+	 * @param answer
+	 */
 	public void setAnswer(Answer answer){
 		_answer = answer;
+		clearAnswers();
 	}
 
+	/**
+	 * Stores student submission
+	 * @param student
+	 */
 	public void studentSubmit(Student student){
 		_answerMap.put(student.getId(), student.getAnswer());
 	}
 
 	private HashMap<Integer, Answer> _answerMap;
 	private Answer _answer;
+	private int idCounter;
+
 }

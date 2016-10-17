@@ -1,9 +1,21 @@
 import answer.Answer;
 
-public class Student {
+/**
+ * @author Joshua Cords
+ * CS 356 Object Oriented Programming - Project 1
+ */
 
-	public Student(int id){
-		_id = id;
+public class Student {
+	public Student(){
+	}
+
+	/**
+	 * Connects with iVote server and assigns id.
+	 * @param iVote
+	 */
+	public void connect(IVote iVote){
+		_iVote = iVote;
+		_id = _iVote.getNewId();
 	}
 
 	public Answer getAnswer(){
@@ -14,18 +26,22 @@ public class Student {
 		return _id;
 	}
 
-	public void setAnswer(Answer answer){
-		_answer = answer;
+	/**
+	 * Retrieves Answer with Question Strings filled from iVote
+	 * @param iVote
+	 */
+	public void retrieveQuestion() {
+		_answer = _iVote.getAnswer(_id);
 	}
 
-	public void setAnswerOptions(String[] answerOptions){
-		_answer.setAnswerOptions(answerOptions);
+	/**
+	 * Submits answer to iVote Server
+	 */
+	public void submitAnswer(){
+		_iVote.studentSubmit(this);
 	}
 
-	public void submitAnswer(IVote iVote){
-		iVote.studentSubmit(this);
-	}
-
-	private int _id;
 	private Answer _answer;
+	private int _id;
+	private IVote _iVote;
 }

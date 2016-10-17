@@ -1,22 +1,39 @@
 package answer;
 
+/**
+ * @author Joshua Cords
+ * CS 356 Object Oriented Programming - Project 1
+ */
+
 public abstract class Answer implements AnswerInterface {
 
+	/**
+	 * Returns true if this Answer contains an answerIndex the same as the passed answer.
+	 * @param answer
+	 * @return
+	 */
 	public boolean containsAnswer(Answer answer) {
-		String[] answerStrings = answer.getAnswer();
-		for(int i = 0; i < answerStrings.length; i++){
-			if(_answerString[i].equals(answerStrings[i])){
-				return true;
+		int[] answerIndexes = answer.getAnswerIndexes();
+		for(int i = 0; i < answerIndexes.length; i++){
+			for(int j = 0; j < _answerIndexes.length; j++){
+				if(_answerIndexes[j] == answerIndexes[i]){
+					return true;
+				}
 			}
 		}
 		return false;
 	}
 
+	/**
+	 * Returns true if this Answer contains identical answerIndexes as the passed answer.
+	 * @param answer
+	 * @return
+	 */
 	@Override
 	public boolean isAnswer(Answer answer) {
-		String[] answerStrings = answer.getAnswer();
-		for(int i = 0; i < answerStrings.length; i++){
-			if(!_answerString[i].equals(answerStrings[i])){
+		int[] answerIndexes = answer.getAnswerIndexes();
+		for(int i = 0; i < answerIndexes.length; i++){
+			if(_answerIndexes[i] != answerIndexes[i]){
 				return false;
 			}
 		}
@@ -24,31 +41,61 @@ public abstract class Answer implements AnswerInterface {
 	}
 
 	@Override
-	public void setAnswer(int[] answerIndexes){
+	public abstract Answer duplicateWithoutAnswers();
 
+	@Override
+	public String[] getAnswerStrings(){
+		return _answerStrings;
 	}
 
 	@Override
-	public abstract void setAnswer(String[] answerString);
+	public int getNumIndexes(){
+		return _answerStrings.length;
+	}
 
-	@Override
-	public void setAnswerOptions(String[] answerOptions) {
-		_answerOptions = answerOptions;
+	/**
+	 * Sets indexes of selected answers, throws IllegalAnswerForm when index is out of bounds.
+	 * @param indexes
+	 * @throws IllegalAnswerForm
+	 */
+	public void setAnswerIndexes(int[] indexes) throws IllegalAnswerForm {
+		validate(indexes);
+		_answerIndexes = indexes;
 	}
 
 	@Override
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
-		for(String answer: _answerString){
-			sb.append(answer);
+		sb.append("Answer Choices:\n");
+		for(String answer: _answerStrings){
+			sb.append(answer + "\n");
 		}
 		return sb.toString();
 	}
 
-	protected String[] getAnswer(){
-		return _answerString;
+	protected int[] getAnswerIndexes() {
+		return _answerIndexes;
 	}
 
-	protected String[] _answerString;
+	/**
+	 * Insures answer indexes stay in bounds
+	 * @param answerIndexes
+	 * @throws IllegalAnswerForm
+	 */
+	@SuppressWarnings("unused")
+	protected void validate(int[] answerIndexes) throws IllegalAnswerForm{
+		try{
+			for(int answerIndex: answerIndexes){
+				String safeIndex = _answerStrings[answerIndex];
+			}
+		} catch (IndexOutOfBoundsException e){
+			throw new IllegalAnswerForm("AnswerIndex must be from under " +
+					"answerString index size, starting with 0");
+		}
+	}
+
+	protected int[] _answerIndexes;
+	protected String[] _answerStrings;
 	protected String[] _answerOptions;
+
 }
