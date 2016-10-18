@@ -17,6 +17,11 @@ public class MultiAnswer extends Answer{
 		_answerStrings = Arrays.copyOf(answerStrings, answerStrings.length);
 	}
 
+	/**
+	 * Creates duplicate Answer without answerIndexes
+	 * @param num
+	 * @return
+	 */
 	@Override
 	public MultiAnswer duplicateWithoutAnswers(){
 		return new MultiAnswer(_answerStrings);

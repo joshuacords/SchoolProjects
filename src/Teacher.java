@@ -46,6 +46,10 @@ public class Teacher {
 
 	}
 
+	public int getNumStudents(){
+		return _numStudents;
+	}
+
 	private void setAnswer() {
 		Answer answer1 = null;
 		try{
@@ -90,14 +94,10 @@ public class Teacher {
 		_answerIndexes[0] = (scanner.nextInt() - 1);
 	}
 
-	public int getNumStudents(){
-		return _numStudents;
-	}
-
-	private int _numStudents;
-	private int _numAnswers;
-	private String[] _answerStrings;
-	private boolean _multiple;
 	private int[] _answerIndexes;
+	private String[] _answerStrings;
 	private IVote _iVote;
+	private boolean _multiple;
+	private int _numAnswers;
+	private int _numStudents;
 }

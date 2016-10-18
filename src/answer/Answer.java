@@ -27,33 +27,15 @@ public abstract class Answer implements AnswerInterface {
 	}
 
 	/**
-	 * Returns true if this Answer contains identical answerIndexes as the passed answer.
-	 * @param answer
+	 * Creates duplicate Answer without answerIndexes
+	 * @param num
 	 * @return
 	 */
 	@Override
-	public boolean isAnswer(Answer answer) {
-		int[] answerIndexes = answer.getAnswerIndexes();
-
-		if(_answerIndexes.length != answerIndexes.length){
-			return false;
-		}
-
-		for(int i = 0; i < answerIndexes.length; i++){
-			if(_answerIndexes[i] != answerIndexes[i]){
-				return false;
-			}
-		}
-		return true;
-	}
-
-	@Override
 	public abstract Answer duplicateWithoutAnswers();
 
-	public SingleAnswer duplicateWithoutAnswers(int num){
-		SingleAnswer sa = new SingleAnswer(_answerStrings);
-		sa.answerId = num;
-		return sa;
+	public int[] getAnswerIndexes() {
+		return _answerIndexes;
 	}
 
 	@Override
@@ -76,6 +58,27 @@ public abstract class Answer implements AnswerInterface {
 	}
 
 	/**
+	 * Returns true if this Answer contains identical answerIndexes as the passed answer.
+	 * @param answer
+	 * @return
+	 */
+	@Override
+	public boolean isAnswer(Answer answer) {
+		int[] answerIndexes = answer.getAnswerIndexes();
+
+		if(_answerIndexes.length != answerIndexes.length){
+			return false;
+		}
+
+		for(int i = 0; i < answerIndexes.length; i++){
+			if(_answerIndexes[i] != answerIndexes[i]){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
 	 * Sets indexes of selected answers, throws IllegalAnswerForm when index is out of bounds.
 	 * @param indexes
 	 * @throws IllegalAnswerForm
@@ -93,10 +96,6 @@ public abstract class Answer implements AnswerInterface {
 			sb.append(answer + "\n");
 		}
 		return sb.toString();
-	}
-
-	public int[] getAnswerIndexes() {
-		return _answerIndexes;
 	}
 
 	/**
@@ -119,6 +118,5 @@ public abstract class Answer implements AnswerInterface {
 	protected int[] _answerIndexes;
 	protected String[] _answerStrings;
 	protected String[] _answerOptions;
-	public int answerId;
 
 }

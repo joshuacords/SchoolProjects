@@ -12,7 +12,7 @@ public class IVote {
 
 	public IVote(){
 		_answerMap = new HashMap<Integer, Answer>();
-		idCounter = 0;
+		_idCounter = 0;
 	}
 
 	/**
@@ -21,7 +21,7 @@ public class IVote {
 	 */
 	public IVote(int classSize){
 		_answerMap = new HashMap<Integer, Answer>((int) (classSize * 1.5));
-		idCounter = 0;
+		_idCounter = 0;
 	}
 
 	/**
@@ -41,7 +41,6 @@ public class IVote {
 
 		for(Answer a : _answerMap.values()){
 			students++;
-//			System.out.println("Student" + students + " Answer " + a.answerId + ": " + a.getAnswerIndexes()[0]);
 
 			for(int i = 0; i < answers.length; i++){
 				if(a.hasAnswerIndex(i)){
@@ -78,7 +77,7 @@ public class IVote {
 	 * @return
 	 */
 	public int getNewId() {
-		return idCounter++;
+		return _idCounter++;
 	}
 
 	/**
@@ -95,6 +94,12 @@ public class IVote {
 	 * @param student
 	 */
 	public void studentSubmit(Student student){
+		//testPrint(student);
+		_answerMap.put(student.getId(), student.getAnswer());
+	}
+
+	@SuppressWarnings("unused")
+	private void testPrint(Student student){
 		System.out.print("Student id: " + student.getId() + " Answer: " );
 
 		for(int index : student.getAnswer().getAnswerIndexes()){
@@ -102,11 +107,10 @@ public class IVote {
 		}
 
 		System.out.println();
-		_answerMap.put(student.getId(), student.getAnswer());
 	}
 
-	private HashMap<Integer, Answer> _answerMap;
 	private Answer _answer;
-	private int idCounter;
+	private HashMap<Integer, Answer> _answerMap;
+	private int _idCounter;
 
 }

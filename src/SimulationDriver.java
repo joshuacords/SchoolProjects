@@ -18,25 +18,6 @@ public class SimulationDriver {
 
 	public static void main(String[] args) {
 
-		/*int numStudents = 10;
-
-
-
-		//create answer with Strings and Correct Answers
-		String[] answerStrings = {"1. A", "2. B"};
-		Answer answer1 = null;
-		try{
-			//answer1 = new SingleAnswer(answerStrings, 0);
-			int[] answerIndexes = {0, 1};
-			answer1 = new MultiAnswer(answerStrings, answerIndexes);
-		}catch(IllegalAnswerForm e){
-			System.out.println(e);
-		}
-
-		System.out.println(answer1);
-
-		//submit to iVote and start poll
-		iVote.setAnswer(answer1);*/
 		//create iVote
 
 		IVote iVote = new IVote();

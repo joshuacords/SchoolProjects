@@ -17,6 +17,11 @@ public class SingleAnswer extends Answer {
 		_answerStrings = Arrays.copyOf(answerStrings, answerStrings.length);
 	}
 
+	/**
+	 * Creates duplicate Answer without answerIndexes
+	 * @param num
+	 * @return
+	 */
 	@Override
 	public SingleAnswer duplicateWithoutAnswers(){
 		return new SingleAnswer(_answerStrings);
