@@ -39,6 +39,8 @@ public class IVote {
 
 		for(Answer a : _answerMap.values()){
 			students++;
+			System.out.println("Student" + students + " Answer " + a.answerId + ": " + a.getAnswerIndexes()[0]);
+
 			if(a.isAnswer(_answer)){
 				correctAnswers++;
 			}
@@ -50,8 +52,8 @@ public class IVote {
 	}
 
 	public Answer getAnswer(int studentId){
-		//TODO return student's last answer in the duplicate answer
-		return _answer.duplicateWithoutAnswers();
+		//TODO return student's last answer indexes in the duplicate answer
+		return _answer.duplicateWithoutAnswers(studentId);
 	}
 
 	/**
@@ -76,6 +78,7 @@ public class IVote {
 	 * @param student
 	 */
 	public void studentSubmit(Student student){
+		System.out.println("Student id: " + student.getId() + " Answer: " + student.getAnswer().getAnswerIndexes()[0]);
 		_answerMap.put(student.getId(), student.getAnswer());
 	}
 

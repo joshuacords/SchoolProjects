@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import answer.Answer;
 import answer.IllegalAnswerForm;
@@ -14,11 +15,13 @@ public class SimulationDriver {
 
 	public static void main(String[] args) {
 
+		int numStudents = 10;
+
 		//create iVote
 		IVote iVote = new IVote();
 
 		//create answer with Strings and Correct Answers
-		String[] answerStrings = {"1. A", "2. B"};
+		String[] answerStrings = {"1. A", "2. B", "3. C"};
 		Answer answer1 = null;
 		try{
 			answer1 = new SingleAnswer(answerStrings, 0);
@@ -33,8 +36,9 @@ public class SimulationDriver {
 
 		//create students
 		List<Student> studentList = new ArrayList<Student>();
-		studentList.add(new Student());
-		studentList.add(new Student());
+		for(int i = 0; i < numStudents; i++){
+			studentList.add(new Student());
+		}
 
 		//students connect with iVote and is assigned id
 		for(Student student: studentList){
@@ -50,10 +54,10 @@ public class SimulationDriver {
 		int[] indexes = new int[1];
 		indexes[0] = 0;
 		for(Student student: studentList){
-			Answer answer = student.getAnswer();
-			indexes[0] = (indexes[0] + 1) % answer.getNumIndexes();
+			indexes[0] = ThreadLocalRandom.current().nextInt(0, student.getAnswer().getNumIndexes());
+			System.out.println("index[0] = " + indexes[0]);
 			try {
-				answer.setAnswerIndexes(indexes);
+				student.setAnswerIndexes(indexes);
 			} catch (IllegalAnswerForm e) {
 				System.out.println(e);
 			}

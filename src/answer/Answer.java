@@ -1,5 +1,7 @@
 package answer;
 
+import java.util.Arrays;
+
 /**
  * @author Joshua Cords
  * CS 356 Object Oriented Programming - Project 1
@@ -43,6 +45,12 @@ public abstract class Answer implements AnswerInterface {
 	@Override
 	public abstract Answer duplicateWithoutAnswers();
 
+	public SingleAnswer duplicateWithoutAnswers(int num){
+		SingleAnswer sa = new SingleAnswer(_answerStrings);
+		sa.answerId = num;
+		return sa;
+	}
+
 	@Override
 	public String[] getAnswerStrings(){
 		return _answerStrings;
@@ -60,7 +68,7 @@ public abstract class Answer implements AnswerInterface {
 	 */
 	public void setAnswerIndexes(int[] indexes) throws IllegalAnswerForm {
 		validate(indexes);
-		_answerIndexes = indexes;
+		_answerIndexes = Arrays.copyOf(indexes, indexes.length);
 	}
 
 	@Override
@@ -73,7 +81,7 @@ public abstract class Answer implements AnswerInterface {
 		return sb.toString();
 	}
 
-	protected int[] getAnswerIndexes() {
+	public int[] getAnswerIndexes() {
 		return _answerIndexes;
 	}
 
@@ -97,5 +105,6 @@ public abstract class Answer implements AnswerInterface {
 	protected int[] _answerIndexes;
 	protected String[] _answerStrings;
 	protected String[] _answerOptions;
+	public int answerId;
 
 }

@@ -17,11 +17,9 @@ public class SingleAnswer extends Answer {
 		_answerStrings = Arrays.copyOf(answerStrings, answerStrings.length);
 	}
 
-	private void setAnswer(String[] answerStrings, int answerIndex) throws IllegalAnswerForm{
-		_answerStrings = Arrays.copyOf(answerStrings, answerStrings.length);
-		_answerIndexes = new int[1];
-		_answerIndexes[0] = answerIndex;
-		validate(_answerIndexes);
+	@Override
+	public SingleAnswer duplicateWithoutAnswers(){
+		return new SingleAnswer(_answerStrings);
 	}
 
 	public void setAnswerIndexes(int answerIndex) throws IllegalAnswerForm{
@@ -34,9 +32,11 @@ public class SingleAnswer extends Answer {
 		setAnswerIndexes(answerIndex);
 	}
 
-	@Override
-	public SingleAnswer duplicateWithoutAnswers(){
-		return new SingleAnswer(_answerStrings);
+	private void setAnswer(String[] answerStrings, int answerIndex) throws IllegalAnswerForm{
+		_answerStrings = Arrays.copyOf(answerStrings, answerStrings.length);
+		_answerIndexes = new int[1];
+		_answerIndexes[0] = answerIndex;
+		validate(_answerIndexes);
 	}
 
 }

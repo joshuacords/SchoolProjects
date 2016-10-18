@@ -1,4 +1,5 @@
 import answer.Answer;
+import answer.IllegalAnswerForm;
 
 /**
  * @author Joshua Cords
@@ -32,6 +33,10 @@ public class Student {
 	 */
 	public void retrieveQuestion() {
 		_answer = _iVote.getAnswer(_id);
+	}
+
+	public void setAnswerIndexes(int[] answerIndexes) throws IllegalAnswerForm{
+		_answer.setAnswerIndexes(answerIndexes);
 	}
 
 	/**
