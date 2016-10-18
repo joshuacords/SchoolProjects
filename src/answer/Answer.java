@@ -34,6 +34,11 @@ public abstract class Answer implements AnswerInterface {
 	@Override
 	public boolean isAnswer(Answer answer) {
 		int[] answerIndexes = answer.getAnswerIndexes();
+
+		if(_answerIndexes.length != answerIndexes.length){
+			return false;
+		}
+
 		for(int i = 0; i < answerIndexes.length; i++){
 			if(_answerIndexes[i] != answerIndexes[i]){
 				return false;
@@ -59,6 +64,15 @@ public abstract class Answer implements AnswerInterface {
 	@Override
 	public int getNumIndexes(){
 		return _answerStrings.length;
+	}
+
+	public boolean hasAnswerIndex(int index){
+		for(int answerIndex : _answerIndexes){
+			if(index == answerIndex){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**

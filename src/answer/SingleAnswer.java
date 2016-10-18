@@ -22,21 +22,15 @@ public class SingleAnswer extends Answer {
 		return new SingleAnswer(_answerStrings);
 	}
 
-	public void setAnswerIndexes(int answerIndex) throws IllegalAnswerForm{
-		int[] index = new int[1];
-		index[0] = answerIndex;
-		validate(index);
-	}
-
 	public void setAnswerIndex(int answerIndex) throws IllegalAnswerForm{
-		setAnswerIndexes(answerIndex);
+		_answerIndexes = new int[1];
+		_answerIndexes[0] = answerIndex;
+		setAnswerIndexes(_answerIndexes);
 	}
 
 	private void setAnswer(String[] answerStrings, int answerIndex) throws IllegalAnswerForm{
 		_answerStrings = Arrays.copyOf(answerStrings, answerStrings.length);
-		_answerIndexes = new int[1];
-		_answerIndexes[0] = answerIndex;
-		validate(_answerIndexes);
+		setAnswerIndex(answerIndex);
 	}
 
 }

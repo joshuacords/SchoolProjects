@@ -1,5 +1,7 @@
 package answer;
 
+import java.util.Arrays;
+
 /**
  * @author Joshua Cords
  * CS 356 Object Oriented Programming - Project 1
@@ -7,22 +9,22 @@ package answer;
 
 public class MultiAnswer extends Answer{
 
-	public MultiAnswer(String[] answerString){
+	public MultiAnswer(String[] answerStrings, int[] answerIndex) throws IllegalAnswerForm{
+		setAnswer(answerStrings, answerIndex);
+	}
 
+	public MultiAnswer(String[] answerStrings){
+		_answerStrings = Arrays.copyOf(answerStrings, answerStrings.length);
 	}
 
 	@Override
-	public boolean isAnswer(Answer answer) {
-		// TODO Auto-generated method stub
-		return false;
+	public MultiAnswer duplicateWithoutAnswers(){
+		return new MultiAnswer(_answerStrings);
 	}
 
-	@Override
-	public Answer duplicateWithoutAnswers() {
-		// TODO Auto-generated method stub
-		return null;
+	private void setAnswer(String[] answerStrings, int[] answerIndexes) throws IllegalAnswerForm{
+		_answerStrings = Arrays.copyOf(answerStrings, answerStrings.length);
+		setAnswerIndexes(answerIndexes);
 	}
-
-
 
 }

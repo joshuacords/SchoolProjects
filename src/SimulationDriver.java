@@ -1,10 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 import answer.Answer;
 import answer.IllegalAnswerForm;
-import answer.SingleAnswer;
+import answer.MultiAnswer;
 
 /**
  * @author Joshua Cords
@@ -21,10 +20,12 @@ public class SimulationDriver {
 		IVote iVote = new IVote();
 
 		//create answer with Strings and Correct Answers
-		String[] answerStrings = {"1. A", "2. B", "3. C"};
+		String[] answerStrings = {"1. A", "2. B"};
 		Answer answer1 = null;
 		try{
-			answer1 = new SingleAnswer(answerStrings, 0);
+			//answer1 = new SingleAnswer(answerStrings, 0);
+			int[] answerIndexes = {0, 1};
+			answer1 = new MultiAnswer(answerStrings, answerIndexes);
 		}catch(IllegalAnswerForm e){
 			System.out.println(e);
 		}
@@ -51,11 +52,12 @@ public class SimulationDriver {
 		}
 
 		//student saves answer indexes
-		int[] indexes = new int[1];
+		int[] indexes = new int[2];
 		indexes[0] = 0;
+		indexes[1] = 1;
 		for(Student student: studentList){
-			indexes[0] = ThreadLocalRandom.current().nextInt(0, student.getAnswer().getNumIndexes());
-			System.out.println("index[0] = " + indexes[0]);
+			//indexes[0] = ThreadLocalRandom.current().nextInt(0, student.getAnswer().getNumIndexes());
+//			System.out.println("index[0] = " + indexes[0]);
 			try {
 				student.setAnswerIndexes(indexes);
 			} catch (IllegalAnswerForm e) {

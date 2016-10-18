@@ -36,14 +36,31 @@ public class IVote {
 	public void displayAnswerStats(){
 		int students = 0;
 		int correctAnswers = 0;
+		int[] answers = new int [_answer.getNumIndexes()];
 
 		for(Answer a : _answerMap.values()){
 			students++;
-			System.out.println("Student" + students + " Answer " + a.answerId + ": " + a.getAnswerIndexes()[0]);
+//			System.out.println("Student" + students + " Answer " + a.answerId + ": " + a.getAnswerIndexes()[0]);
+
+			for(int i = 0; i < answers.length; i++){
+				if(a.hasAnswerIndex(i)){
+					answers[i]++;
+				}
+			}
 
 			if(a.isAnswer(_answer)){
 				correctAnswers++;
 			}
+		}
+
+		for(int i = 0; i < answers.length; i++){
+			System.out.print(_answer.getAnswerStrings()[i] + "\t" + answers[i]);
+
+			if(_answer.hasAnswerIndex(i)){
+				System.out.print("\tCorrect");
+			}
+
+			System.out.println();
 		}
 
 		System.out.println(students + " Students Polled");
@@ -53,7 +70,7 @@ public class IVote {
 
 	public Answer getAnswer(int studentId){
 		//TODO return student's last answer indexes in the duplicate answer
-		return _answer.duplicateWithoutAnswers(studentId);
+		return _answer.duplicateWithoutAnswers();
 	}
 
 	/**
