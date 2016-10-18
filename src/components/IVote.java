@@ -1,3 +1,4 @@
+package components;
 import java.util.HashMap;
 
 import answer.Answer;
@@ -68,8 +69,7 @@ public class IVote {
 		System.out.println((float)correctAnswers*100/students + "% Correct");
 	}
 
-	public Answer getAnswer(int studentId){
-		//TODO return student's last answer indexes in the duplicate answer
+	public Answer getAnswer(){
 		return _answer.duplicateWithoutAnswers();
 	}
 
@@ -95,7 +95,13 @@ public class IVote {
 	 * @param student
 	 */
 	public void studentSubmit(Student student){
-		System.out.println("Student id: " + student.getId() + " Answer: " + student.getAnswer().getAnswerIndexes()[0]);
+		System.out.print("Student id: " + student.getId() + " Answer: " );
+
+		for(int index : student.getAnswer().getAnswerIndexes()){
+			System.out.print(index + ", ");
+		}
+
+		System.out.println();
 		_answerMap.put(student.getId(), student.getAnswer());
 	}
 

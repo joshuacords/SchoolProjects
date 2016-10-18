@@ -1,3 +1,4 @@
+package components;
 import answer.Answer;
 import answer.IllegalAnswerForm;
 
@@ -32,7 +33,7 @@ public class Student {
 	 * @param iVote
 	 */
 	public void retrieveQuestion() {
-		_answer = _iVote.getAnswer(_id);
+		_answer = _iVote.getAnswer();
 	}
 
 	public void setAnswerIndexes(int[] answerIndexes) throws IllegalAnswerForm{
